@@ -1,0 +1,80 @@
+// Bazı ayarlar pencerelerden yapılmış olabilir.
+
+
+public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void btnMsgBox_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show("Merhaba");
+            //MessageBox.Show("Merhaba","UYARI");
+            //MessageBox.Show("Merhaba","UYARI",MessageBoxButtons.YesNo);
+            //MessageBox.Show("Merhaba","UYARI",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show("Merhaba", "UYARI", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                MessageBox.Show("Artık silebilirsiniz...");
+            }
+            else if (dialogResult == DialogResult.No)
+                MessageBox.Show("Birşey yapma...");
+
+        }
+
+        private void btnRenk_Click(object sender, EventArgs e)
+        {
+            colorDialog1.ShowDialog();
+            this.BackColor = colorDialog1.Color;
+
+            MessageBox.Show($"R:{BackColor.R} G:{BackColor.G} B:{BackColor.B}");
+        }
+
+        private void btnFont_Click(object sender, EventArgs e)
+        {
+            fontDialog1.ShowDialog();
+            label1.Font = fontDialog1.Font;
+            label1.ForeColor = fontDialog1.Color;
+
+        }
+
+        private void btnKlasor_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.ShowDialog();
+            MessageBox.Show(folderBrowserDialog1.SelectedPath);
+        }
+
+        private void btnAc_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "Tüm Dosyalar|*.*|Jpeg Dosyalar|*.jpg|Text Dosyalar|*.txt|Word Dosyasi|*.docx";
+            openFileDialog1.ShowDialog();
+            MessageBox.Show(openFileDialog1.FileName);
+
+
+            if (openFileDialog1.FileName.Contains(".jpg"))
+            {
+                this.BackgroundImage = Image.FromFile(openFileDialog1.FileName);
+                BackgroundImageLayout = ImageLayout.Stretch;
+            }
+
+        }
+
+        private void btnKaydet_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label1.Text = DateTime.Now.ToLongTimeString();
+            label1.Left += 5;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
